@@ -3,23 +3,23 @@ DROP TABLE IF EXISTS "Cities";
 
 -- 'Cities' tablosunu oluştur
 CREATE TABLE "Cities" (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  lat DOUBLE PRECISION,
-  lng DOUBLE PRECISION,
-  northeast_lat DOUBLE PRECISION,
-  northeast_lng DOUBLE PRECISION,
-  southwest_lat DOUBLE PRECISION,
-  southwest_lng DOUBLE PRECISION,
-  centroid GEOMETRY(Point, 4326), -- Konum verisini saklamak için bir 'geometry' sütunu ekledik
-  bounds GEOMETRY(Polygon, 4326) -- Sınır verilerini saklamak için bir 'geometry' sütunu ekledik
+  Id SERIAL PRIMARY KEY,
+  CityName VARCHAR(255) NOT NULL,
+  Latitude DOUBLE PRECISION,
+  Longitude DOUBLE PRECISION,
+  NortheastLatitude DOUBLE PRECISION,
+  NortheastLongitude DOUBLE PRECISION,
+  SouthwestLatitude DOUBLE PRECISION,
+  SouthwestLongitude DOUBLE PRECISION,
+  CentroidPoint GEOMETRY(Point, 4326), -- Konum verisini saklamak için bir 'geometry' sütunu ekledik
+  BoundaryPolygon GEOMETRY(Polygon, 4326) -- Sınır verilerini saklamak için bir 'geometry' sütunu ekledik
 );
 
 -- PostGIS uzantısını aktif et
 CREATE EXTENSION IF NOT EXISTS postgis;
 
 -- Veri ekleme işlemi
-INSERT INTO "Cities" (title, lat, lng, northeast_lat, northeast_lng, southwest_lat, southwest_lng, centroid, bounds)
+INSERT INTO "Cities" (CityName, Latitude, Longitude, NortheastLatitude, NortheastLongitude, SouthwestLatitude, SouthwestLongitude, CentroidPoint, BoundaryPolygon)
 VALUES 
   ('ADANA', 37.00000000, 35.32133330, 37.07200400, 35.46199500, 36.93552300, 35.17470600,
    ST_SetSRID(ST_MakePoint(35.32133330, 37.00000000), 4326), 
